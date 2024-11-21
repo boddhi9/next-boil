@@ -26,17 +26,24 @@ const confirmPrompt = (question) =>
     });
   });
 
+const resolveProjectPath = (baseDir, projectName) => {
+  return path.isAbsolute(projectName)
+    ? projectName
+    : path.resolve(baseDir, projectName);
+};
+
 program
   .name('next-boil')
   .description('A CLI to bootstrap your Next.js starter pack')
-  .version('0.1.0')
+  .version('0.1.1')
   .argument('[project-name]', 'Name of the project directory', 'next-app')
   .option('-f, --force', 'Force creation even if directory exists and is not empty')
   .option('-t, --template <url>', 'Custom template repository URL', 'https://github.com/boddhi9/next-template')
+  .option('-b, --base-dir <path>', 'Base directory for project creation', process.cwd())
   .option('--debug', 'Show detailed error stack for debugging')
   .action(async (projectName, options) => {
-    const { force, template, debug } = options;
-    const projectPath = path.resolve(process.cwd(), projectName);
+    const { force, template, debug, baseDir } = options;
+    const projectPath = resolveProjectPath(baseDir, projectName);
     const spinner = ora();
     let retries = 3;
 
@@ -112,6 +119,7 @@ Examples:
   $ next-boil my-next-app
   $ next-boil my-next-app --force
   $ next-boil my-next-app --template https://github.com/user/custom-template
+  $ next-boil my-next-app --base-dir ~/projects
 `
 );
 
