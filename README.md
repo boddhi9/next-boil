@@ -1,26 +1,30 @@
-# Next-Boil
+# next-boil
 
-**Next-Boil** is a CLI tool to bootstrap your Next.js starter pack with ease. Clone a pre-configured template, customize it with options, and start your Next.js journey in seconds.
+**next-boil** is a CLI tool to bootstrap your Next.js starter pack with ease. Clone a pre-configured template, customize it with options, and start your Next.js journey in seconds.
 
 ## Features
 
-- Clone a Next.js template repository quickly
-- Use a custom template URL with the `--template` flag
-- Force overwrite existing directories with the `--force` flag
-- Simple, intuitive, and beginner-friendly
+- **Next.js 15**
+- **Tailwind CSS 3**
+- **shadcn-ui**
+- **TypeScript**
+- **ESLint**
+- **Prettier**
+- **Jest**
+- **Absolute Imports**
 
 ## Installation
 
 Install globally via npm:
 
 ```bash
-npx next-boil my-next-app
+npm install -g next-boil
 ```
 
 or
 
 ```bash
-npm install -g next-boil
+npx next-boil my-next-app
 ```
 
 ## Usage

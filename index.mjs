@@ -44,12 +44,13 @@ program
   .action(async (projectName, options) => {
     const { force, template, debug, baseDir } = options;
     const projectPath = resolveProjectPath(baseDir, projectName);
+    const { red, yellow, green, cyan, bold } = chalk;
     const spinner = ora();
     let retries = 3;
 
     try {
       if (!/^[a-zA-Z0-9-_]+$/.test(projectName)) {
-        console.error(chalk.red(`Error: Invalid project name "${projectName}". Only letters, numbers, dashes, and underscores are allowed.`));
+        console.error(red(`Error: Invalid project name "${projectName}". Only letters, numbers, dashes, and underscores are allowed.`));
         process.exit(1);
       }
 
@@ -57,20 +58,20 @@ program
         if (!force) {
           if (!isDirectoryEmpty(projectPath)) {
             console.error(
-              chalk.red(
-                `Error: Directory ${chalk.bold(projectName)} already exists and is not empty. Use the --force flag to override.`
+              red(
+                `Error: Directory ${bold(projectName)} already exists and is not empty. Use the --force flag to override.`
               )
             );
             process.exit(1);
           }
         } else {
           const confirm = await confirmPrompt(
-            chalk.yellow(
+            yellow(
               `Warning: Force mode will delete files in the directory "${projectName}". Continue? (y/N): `
             )
           );
           if (!confirm) {
-            console.log(chalk.red('Operation aborted.'));
+            console.log(red('Operation aborted.'));
             process.exit(1);
           }
         }
@@ -81,10 +82,10 @@ program
       const cloneRepo = async () => {
         while (retries > 0) {
           try {
-            spinner.start(`Cloning template from ${chalk.cyan(template)}...`);
+            spinner.start(`Cloning template from ${cyan(template)}...`);
             const emitter = degit(template, { cache: false, force: true });
             await emitter.clone(projectPath);
-            spinner.succeed(`Repository cloned into ${chalk.bold(projectPath)}.`);
+            spinner.succeed(`Repository cloned into ${bold(projectPath)}.`);
             return;
           } catch (err) {
             retries -= 1;
@@ -96,17 +97,17 @@ program
 
       await cloneRepo();
 
-      console.log(chalk.green(`\nProject setup completed successfully!`));
-      console.log(chalk.cyan(`\nNext steps:`));
-      console.log(chalk.yellow(`  cd ${projectName}`));
-      console.log(chalk.yellow(`  npm install`));
-      console.log(chalk.yellow(`  npm run dev`));
+      console.log(green(`\nProject setup completed successfully!`));
+      console.log(cyan(`\nNext steps:`));
+      console.log(yellow(`  cd ${projectName}`));
+      console.log(yellow(`  npm install`));
+      console.log(yellow(`  npm run dev`));
     } catch (err) {
-      spinner.fail(chalk.red('Project setup failed.'));
+      spinner.fail(red('Project setup failed.'));
       if (debug) {
-        console.error(chalk.red(err.stack || err.message));
+        console.error(red(err.stack || err.message));
       } else {
-        console.error(chalk.red(`Error: ${err.message}`));
+        console.error(red(`Error: ${err.message}`));
       }
       process.exit(1);
     }
