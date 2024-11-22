@@ -1,6 +1,6 @@
 {
   "name": "next-boil",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "CLI to bootstrap a Next.js starter pack",
   "bin": {
     "next-boil": "./index.mjs"
