@@ -17,8 +17,9 @@
 
 ## Requirements
 
-- Node.js >= `v20`
+- Node.js >= `20.14.0`
 - Yarn >= `1.22.18` (if using Yarn as your package manager)
+- pnpm >= `8.3.1` (if using pnpm as your package manager)
 
 ## Installation
 
