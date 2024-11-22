@@ -12,6 +12,13 @@
 - **Prettier**
 - **Jest**
 - **Absolute Imports**
+- **Customizable Package Manager Support** (`npm`, `yarn`, or `pnpm`)
+- **Git Initialization**
+
+## Requirements
+
+- Node.js >= `v20`
+- Yarn >= `1.22.18` (if using Yarn as your package manager)
 
 ## Installation
 
@@ -21,7 +28,7 @@ Install globally via npm:
 npm install -g next-boil
 ```
 
-or
+Or, use it directly via `npx`:
 
 ```bash
 npx next-boil my-next-app
@@ -38,17 +45,20 @@ next-boil my-next-app
 ```
 
 This will:
-- Create a directory named `my-next-app`
-- Clone the default template from the repository
-- Set up your project ready for development
+- Create a directory named `my-next-app`.
+- Clone the default template from the repository.
+- Set up your project, ready for development.
 
 ### Options
 
-| Option                  | Description                                      |
-|-------------------------|--------------------------------------------------|
-| `-t, --template <url>`  | Specify a custom template repository URL         |
-| `-f, --force`           | Force overwrite existing non-empty directories   |
-| `--debug`               | Show detailed error stack for debugging purposes |
+| Option                     | Description                                      |
+|----------------------------|--------------------------------------------------|
+| `-t, --template <url>`     | Specify a custom template repository URL         |
+| `-f, --force`              | Force overwrite existing non-empty directories   |
+| `-b, --base-dir <path>`    | Specify a base directory for project creation    |
+| `-p, --package-manager`    | Choose a package manager (`npm`, `yarn`, `pnpm`) |
+| `--no-git`                 | Skip git initialization                          |
+| `--debug`                  | Show detailed error stack for debugging purposes |
 
 ### Examples
 
@@ -70,7 +80,25 @@ This will:
    next-boil my-next-app --force
    ```
 
-4. Debug issues with verbose error messages:
+4. Use a custom base directory:
+
+   ```bash
+   next-boil my-next-app --base-dir ~/projects
+   ```
+
+5. Select a package manager (`yarn`, `npm`, or `pnpm`):
+
+   ```bash
+   next-boil my-next-app --package-manager yarn
+   ```
+
+6. Skip Git initialization:
+
+   ```bash
+   next-boil my-next-app --no-git
+   ```
+
+7. Debug issues with verbose error messages:
 
    ```bash
    next-boil my-next-app --debug
@@ -93,6 +121,8 @@ cd my-next-app
 npm install
 npm run dev
 ```
+
+If you selected a package manager like Yarn or PNPM, replace `npm` with your chosen package manager.
 
 ## License
 
